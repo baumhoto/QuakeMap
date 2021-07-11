@@ -1,3 +1,3 @@
 # QuakeMap
 
-A description of this package.
+Package for loading QuakeMap files.
