@@ -9,11 +9,11 @@ import struct Euclid.Vertex
 import Foundation
 
 public class Brush {
-    var planes: [Plane]
-    var vertices: [Vertex]
-    var lineLoopIndices: [Int]
-    var indices: [Int]
-    var polygons: [Polygon]
+    public var planes: [Plane]
+    public var vertices: [Vertex]
+    public var lineLoopIndices: [Int]
+    public var indices: [Int]
+    public var polygons: [Polygon]
     
     static let defaultPlaneCombinations: [[Int]] = Helper.combinations(count: 6, size: 3)
     static let tolerance = 0.01
