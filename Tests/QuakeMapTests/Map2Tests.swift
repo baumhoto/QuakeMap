@@ -44,10 +44,10 @@ class Map2Tests: XCTestCase {
         XCTAssertEqual(brush?.planes.count, 6)
         let planes = brush?.planes;
         
-        XCTAssertEqual(planes![0].vectors.count, 3)
-        XCTAssertEqual(planes![0].vectors[0], Vector(-288, -192, -96))
-        XCTAssertEqual(planes![0].vectors[1], Vector(-288, -160, -96))
-        XCTAssertEqual(planes![0].vectors[2], Vector(-288, -192, 256))
+        XCTAssertEqual(planes![0].points.count, 3)
+        XCTAssertEqual(planes![0].points[0], Vector(-288, -192, -96))
+        XCTAssertEqual(planes![0].points[1], Vector(-288, -160, -96))
+        XCTAssertEqual(planes![0].points[2], Vector(-288, -192, 256))
     }
     
     func testPerformanceExample() throws {

@@ -72,11 +72,11 @@ public class MapLoader {
     }
     
     private func ParseBrush(startLine: Int) throws -> (Int, Brush) {
-        var brush = Brush()
+        var planes : [Plane] = []
         for i in startLine..<lines!.count {
             switch(lines![i].first!) {
-            case "(": brush.planes.append(try ParsePlane(planeString: lines![i]))                                   //entity has brushes
-            case "}": return (i + 1, brush)
+            case "(": planes.append(try ParsePlane(planeString: lines![i]))                                   //entity has brushes
+            case "}": return (i + 1, try Brush(planes))
             default: continue
             }
         }
@@ -85,19 +85,19 @@ public class MapLoader {
     }
     
     private func ParsePlane(planeString: String) throws -> Plane {
-        var plane = Plane()
-        var vector : Vector
+        var planePoints = [Vector](repeating: Vector.zero, count: 3)
         var newIndex = 0
+        var pointIndex = 0
         for i in 0..<planeString.count {
             if i < newIndex { continue }
             switch(planeString[safe: i]) {
-                case "(": (newIndex, vector) = try ParseVector(planeSubString: planeString[safe: i+1..<planeString.count]!); plane.vectors.append(vector);
+                case "(": (newIndex, planePoints[pointIndex]) = try ParseVector(planeSubString: planeString[safe: i+1..<planeString.count]!); pointIndex+=1;
                 default: continue
                 // TODO textures
             }
         }
         
-        return plane
+        return Plane(planePoints, Winding.Clockwise)
     }
     
     private func ParseVector(planeSubString: String) throws -> (Int, Vector) {
@@ -130,33 +130,14 @@ extension Collection {
     func distance(to index: Index) -> Int { distance(from: startIndex, to: index) }
 }
 
-public struct Map {
-    public var entities : [Entity] = []
-}
 
-public struct Entity {
-    public var properties : Dictionary<String, String> = [:]
-    public var brushes: [Brush]  = []
-}
 
-public struct Brush {
-    public var planes: [Plane] = []
-}
 
-public struct Plane {
-    var polygon: Polygon?
-    public var vectors: [Vector] =  []
-    
-}
 
-public struct Polygon {
-}
 
-public enum MapParsingError : Error {
-    case EntityNotClosed
-    case BrushNotClosed
-    case VectorNotClosed
-    case VectorElementMissing
-    case VectorInvalidValue
-}
+
+
+
+
+
 

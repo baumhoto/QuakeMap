@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import QuakeMap
-
+@testable import QuakeMap
 
 class TestHelper {
     
