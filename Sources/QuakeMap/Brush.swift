@@ -40,7 +40,7 @@ public class Brush {
     
     internal func calculatePlaneIntersections() throws {
         
-        for combo in Brush.defaultPlaneCombinations {
+        for combo in Helper.combinations(count: self.planes.count, size: 3) {
             let planeCombination = planes.enumerated().filter( { combo.contains($0.offset) }).map({ $0.element })
             
             let intersection = try Plane.intersect(planeCombination)

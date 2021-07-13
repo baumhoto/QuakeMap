@@ -74,7 +74,6 @@ public class Helper {
         let pairs = Helper.permutations(count: vertices.count, size: 2)
         
         let boundingBox = BoundingBox(vertices)
-        print(boundingBox.center)
         
         let angles = getClockwiseAngles(vertices: vertices, pairs: pairs, center: boundingBox.center, normal: normal)
         
